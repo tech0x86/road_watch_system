@@ -16,7 +16,7 @@ def create_timelapse(date, input_dir, output_dir):
     height, width, layers = frame.shape
     size = (width, height)
 
-    out = cv2.VideoWriter(f'{output_dir}/timelapse_{date}.mp4', cv2.VideoWriter_fourcc(*'mp4v'), 5, size)
+    out = cv2.VideoWriter(f'{output_dir}/timelapse_{date}.mp4', cv2.VideoWriter_fourcc(*'avc1'), 5, size)
 
     for filename in images:
         img = cv2.imread(filename)
@@ -46,5 +46,5 @@ output_dir = os.path.join(base_dir, 'movie')
 
 yesterday = datetime.now() - timedelta(days=1)
 date_str = yesterday.strftime('%Y%m%d')
-#date_str = '20240106'
+date_str = '20240111'
 create_timelapse(date_str, input_dir, output_dir)
