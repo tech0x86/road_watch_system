@@ -16,10 +16,18 @@ csv_filename=f"{date_only}.csv"
 objects_list = ['bicycle', 'car', 'motorbike', 'bus', 'truck', 'person', 'bird', 'cat', 'dog', 'umbrella', 'suitcase']
 
 base_path = os.path.dirname(os.path.abspath(__file__))
-image_path = os.path.join(base_path, 'pic/', filename)
+# 新しいディレクトリパスの作成
+pic_dir = os.path.join(base_path, 'pic/', date_only)
+detect_pic_dir = os.path.join(base_path, 'detect_pic/', date_only)
+# 新しいディレクトリを作成（存在しない場合）
+os.makedirs(pic_dir, exist_ok=True)
+os.makedirs(detect_pic_dir, exist_ok=True)
+
+image_path = os.path.join(pic_dir, filename)
 csv_path = os.path.join(base_path, 'csv/', csv_filename)
-detect_image_path = os.path.join(base_path, 'detect_pic/','detect_'+filename)
-subprocess.run(["libcamera-still", "--nopreview", "-o", image_path, "--width", "2592", "--height", "1944"])
+detect_image_path = os.path.join(detect_pic_dir, 'detect_' + filename)
+
+subprocess.run(["libcamera-still", "--nopreview", "-o", image_path, "--width", "1920", "--height", "1080"])
 
 # パスの設定
 config_path = os.path.join(base_path, 'yolov4-tiny.cfg')

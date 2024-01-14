@@ -3,7 +3,8 @@ import glob
 import os
 from datetime import datetime, timedelta
 
-def create_timelapse(date, input_dir, output_dir):
+def create_timelapse(date, base_input_dir, output_dir):
+    input_dir = os.path.join(base_input_dir, date)  # 日付ディレクトリを追加
     images = sorted(glob.glob(f'{input_dir}/detect_{date}_*.jpg'), key=lambda x: os.path.basename(x))
 
     if not images:
@@ -32,7 +33,7 @@ def create_timelapse(date, input_dir, output_dir):
         text_size = cv2.getTextSize(text, font, font_scale, line_type)[0]
 
         # テキストの位置を動的に設定
-        text_position = (width - text_size[0] - 10, height - 10) # 画像の右下に位置するように調整
+        text_position = (width - text_size[0] - 10, 20) # 画像の右下に位置するように調整
 
         cv2.putText(img, text, text_position, font, font_scale, font_color, line_type)
 
@@ -41,10 +42,13 @@ def create_timelapse(date, input_dir, output_dir):
     out.release()
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
-input_dir = os.path.join(base_dir, 'detect_pic')
+base_input_dir = os.path.join(base_dir, 'detect_pic')  # ベースの入力ディレクトリ
 output_dir = os.path.join(base_dir, 'movie')
 
 yesterday = datetime.now() - timedelta(days=1)
 date_str = yesterday.strftime('%Y%m%d')
-date_str = '20240111'
-create_timelapse(date_str, input_dir, output_dir)
+#date_str = '20240107'
+create_timelapse(date_str, base_input_dir, output_dir)  # 関数呼び出し時の引数を変更
+
+
+
