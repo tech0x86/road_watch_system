@@ -23,5 +23,7 @@
 # m h  dom mon dow   command
 */2 * * * * /usr/bin/python3 /home/pi4b2/Desktop/camera_system/main.py
 3 0 * * * /usr/bin/python3 /home/pi4b2/Desktop/camera_system/create_movie.py
-3 3 * * * sudo rsync -av /home/pi4b2/Desktop/camera_system /mnt/nas/pi4cam
+3 1 * * * /home/pi4b2/Desktop/camera_system/cleanup.sh
+0 3 * * 3 sudo rsync -av /home/pi4b2/Desktop/camera_system /mnt/nas/pi4cam
+
 @reboot /usr/bin/python3 /home/pi4b2/Desktop/movie_site/flask_script.py

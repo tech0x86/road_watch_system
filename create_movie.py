@@ -47,8 +47,6 @@ output_dir = os.path.join(base_dir, 'movie')
 
 yesterday = datetime.now() - timedelta(days=1)
 date_str = yesterday.strftime('%Y%m%d')
-#date_str = '20240107'
+#date_str = '20240114'
 create_timelapse(date_str, base_input_dir, output_dir)  # 関数呼び出し時の引数を変更
-
-
 
