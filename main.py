@@ -27,7 +27,8 @@ image_path = os.path.join(pic_dir, filename)
 csv_path = os.path.join(base_path, 'csv/', csv_filename)
 detect_image_path = os.path.join(detect_pic_dir, 'detect_' + filename)
 
-subprocess.run(["libcamera-still", "--nopreview", "-o", image_path, "--width", "1920", "--height", "1080"])
+#subprocess.run(["libcamera-still", "--nopreview", "-o", image_path, "--width", "1920", "--height", "1080"])
+subprocess.run(["fswebcam", "-r", "1280x720","--no-banner","-F", "50", image_path])
 
 # パスの設定
 config_path = os.path.join(base_path, 'yolov4-tiny.cfg')
